@@ -29,3 +29,12 @@ def save_data(data):
     save_data(data)
 
     print("Тренировка добавлена!")
+
+def show_workouts(data):
+    if len(data["workouts"]) == 0:
+        print("Тренировок нет.")
+    else:
+        print("\n=== ТРЕНИРОВКИ ===")
+        for i in range(len(data["workouts"])):
+            workout = data["workouts"][i]
+            print(i + 1, "-", workout["date"], "-", workout["exercise"])
