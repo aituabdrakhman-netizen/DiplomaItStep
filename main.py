@@ -14,13 +14,9 @@ def load_data():
             "goal": ""
         }
 
-
 def save_data(data):
     with open(FILE_NAME, "w", encoding="utf-8") as file:
-        json.dump(data, file, ensure_ascii=False, indent=4)
-
-
-def add_workout(data):
+        json.dump(data, file, ensure_ascii=False, indent=4)def add_workout(data):
     date = input("Дата тренировки: ")
     exercise = input("Упражнение: ")
 
@@ -33,12 +29,3 @@ def add_workout(data):
     save_data(data)
 
     print("Тренировка добавлена!")
-
-
-def show_workouts(data):
-    if len(data["workouts"]) == 0:
-        print("Тренировок нет.")
-    else:
-        for i in range(len(data["workouts"])):
-            workout = data["workouts"][i]
-            print(i + 1, "-", workout["date"], "-", workout["exercise"])
