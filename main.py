@@ -70,3 +70,18 @@ def show_goal(data):
         print("Цель не установлена.")
     else:
         print("Текущая цель:", data["goal"])
+
+def show_statistics(data):
+    print("\n=== СТАТИСТИКА ===")
+    print("Количество тренировок:", len(data["workouts"]))
+
+    if len(data["weights"]) > 0:
+        print("Последний вес:", data["weights"][-1], "кг")
+    else:
+        print("Вес ещё не добавлялся.")
+
+    if data["goal"] != "":
+        print("Текущая цель:", data["goal"])
+    else:
+        print("Цель не установлена.")
+
