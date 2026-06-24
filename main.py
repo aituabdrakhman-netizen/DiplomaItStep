@@ -17,7 +17,7 @@ def load_data():
 def save_data(data):
     with open(FILE_NAME, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=4)def add_workout(data):
-    date = input("Дата тренировки: ")
+    data = input("Дата тренировки: ")
     exercise = input("Упражнение: ")
 
     workout = {
