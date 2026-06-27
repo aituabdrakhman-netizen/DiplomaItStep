@@ -93,3 +93,46 @@ print("Персональный фитнес-дневник")
 print()
 
 data = load_data()
+
+while True:
+    print("\n=== ГЛАВНОЕ МЕНЮ ===")
+    print("1 - Добавить тренировку")
+    print("2 - Показать тренировки")
+    print("3 - Добавить вес")
+    print("4 - История веса")
+    print("5 - Установить цель")
+    print("6 - Показать цель")
+    print("7 - Статистика")
+    print("0 - Выход")
+
+    choice = input("Выберите пункт: ")
+
+    if choice == "1":
+        add_workout(data)
+
+    elif choice == "2":
+        show_workouts(data)
+
+    elif choice == "3":
+        add_weight(data)
+
+    elif choice == "4":
+        show_weights(data)
+
+    elif choice == "5":
+        set_goal(data)
+
+    elif choice == "6":
+        show_goal(data)
+
+    elif choice == "7":
+        show_statistics(data)
+
+    elif choice == "0":
+        print("\nВсе данные сохранены.")
+        print("Спасибо за использование FitTracker!")
+        print("До свидания!")
+        break
+
+    else:
+        print("Такого пункта нет.")
