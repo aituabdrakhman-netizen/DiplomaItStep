@@ -13,13 +13,15 @@ def load_data():
             "weights": [],
             "goal": ""
         }
-    
+
+
 def save_data(data):
     with open(FILE_NAME, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
-        return
-    
-    data = input("Дата тренировки: ")
+
+
+def add_workout(data):
+    date = input("Дата тренировки: ")
     exercise = input("Упражнение: ")
 
     workout = {
@@ -31,31 +33,36 @@ def save_data(data):
     save_data(data)
 
     print("Тренировка добавлена!")
-    
-def add_workout(data):
-    date = input("Дата тренировки: ")
-    exercise = input("Упражнение: ")
 
-    workout = {
-        "date": date,
-        "exercise": exercise
-    }
 
 def show_workouts(data):
     if len(data["workouts"]) == 0:
         print("Тренировок нет.")
     else:
         print("\n=== ТРЕНИРОВКИ ===")
+
         for i in range(len(data["workouts"])):
             workout = data["workouts"][i]
-            print(i + 1, "-", workout["date"], "-", workout["exercise"])
+
+            print(
+                i + 1,
+                "-",
+                workout["date"],
+                "-",
+                workout["exercise"]
+            )
+
 
 def add_weight(data):
     try:
         weight = float(input("Введите вес: "))
+
         data["weights"].append(weight)
+
         save_data(data)
+
         print("Вес сохранён.")
+
     except:
         print("Ошибка ввода!")
 
@@ -65,14 +72,18 @@ def show_weights(data):
         print("История веса пуста.")
     else:
         print("\n=== ИСТОРИЯ ВЕСА ===")
+
         for weight in data["weights"]:
             print(weight, "кг")
 
 
 def set_goal(data):
     goal = input("Введите цель: ")
+
     data["goal"] = goal
+
     save_data(data)
+
     print("Цель сохранена.")
 
 
@@ -82,8 +93,10 @@ def show_goal(data):
     else:
         print("Текущая цель:", data["goal"])
 
+
 def show_statistics(data):
     print("\n=== СТАТИСТИКА ===")
+
     print("Количество тренировок:", len(data["workouts"]))
 
     if len(data["weights"]) > 0:
@@ -96,12 +109,12 @@ def show_statistics(data):
     else:
         print("Цель не установлена.")
 
+
 print("=" * 35)
 print("      ДОБРО ПОЖАЛОВАТЬ")
 print("         В FITTRACKER")
 print("=" * 35)
 print("Персональный фитнес-дневник")
-print()
 
 data = load_data()
 
