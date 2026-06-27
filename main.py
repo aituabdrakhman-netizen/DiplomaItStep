@@ -85,3 +85,11 @@ def show_statistics(data):
     else:
         print("Цель не установлена.")
 
+print("=" * 35)
+print("      ДОБРО ПОЖАЛОВАТЬ")
+print("         В FITTRACKER")
+print("=" * 35)
+print("Персональный фитнес-дневник")
+print()
+
+data = load_data()
