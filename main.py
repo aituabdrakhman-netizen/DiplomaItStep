@@ -105,6 +105,28 @@ def show_workouts(data):
             )
 
 
+def delete_workout(data):
+    if len(data["workouts"]) == 0:
+        print("Удалять нечего.")
+        return
+
+    show_workouts(data)
+
+    try:
+        number = int(input("Введите номер тренировки для удаления: "))
+
+        if 1 <= number <= len(data["workouts"]):
+            deleted = data["workouts"].pop(number - 1)
+            save_data(data)
+            print("Тренировка удалена:",
+                  deleted["date"], "-", deleted["exercise"])
+        else:
+            print("Такого номера нет.")
+
+    except:
+        print("Ошибка ввода!")
+
+
 def add_weight(data):
     try:
         weight = float(input("Введите вес: "))
@@ -166,12 +188,32 @@ print("=" * 35)
 print("      ДОБРО ПОЖАЛОВАТЬ")
 print("         В FITTRACKER")
 print("=" * 35)
-print("Персональный фитнес-дневник")
+
+user = None
+
+while user is None:
+    print("\n1 - Войти")
+    print("2 - Зарегистрироваться")
+    print("0 - Выход")
+
+    choice = input("Выберите пункт: ")
+
+    if choice == "1":
+        user = login()
+
+    elif choice == "2":
+        user = register()
+
+    elif choice == "0":
+        exit()
+
+FILE_NAME = user + "_data.json"
 
 data = load_data()
 
 while True:
     print("\n=== ГЛАВНОЕ МЕНЮ ===")
+    print("Пользователь:", user)
     print("1 - Добавить тренировку")
     print("2 - Показать тренировки")
     print("3 - Добавить вес")
@@ -179,6 +221,7 @@ while True:
     print("5 - Установить цель")
     print("6 - Показать цель")
     print("7 - Статистика")
+    print("8 - Удалить тренировку")
     print("0 - Выход")
 
     choice = input("Выберите пункт: ")
@@ -203,11 +246,13 @@ while True:
 
     elif choice == "7":
         show_statistics(data)
+        
+    elif choice == "8":
+        delete_workout(data)
 
     elif choice == "0":
         print("\nВсе данные сохранены.")
-        print("Спасибо за использование FitTracker!")
-        print("До свидания!")
+        print("До свидания,", user)
         break
 
     else:
