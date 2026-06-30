@@ -1,7 +1,59 @@
 import json
+import os
 
-FILE_NAME = "data.json"
+USERS_FILE = "users.json"
+FILE_NAME = ""
 
+def load_users():
+    try:
+        with open(USERS_FILE, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except:
+        return {}
+
+
+def save_users(users):
+    with open(USERS_FILE, "w", encoding="utf-8") as file:
+        json.dump(users, file, ensure_ascii=False, indent=4)
+
+
+def register():
+    users = load_users()
+
+    print("\n=== РЕГИСТРАЦИЯ ===")
+
+    login = input("Логин: ")
+
+    if login in users:
+        print("Такой пользователь уже существует!")
+        return None
+
+    password = input("Пароль: ")
+
+    users[login] = password
+
+    save_users(users)
+
+    print("Регистрация прошла успешно!")
+
+    return login
+
+
+def login():
+    users = load_users()
+
+    print("\n=== ВХОД ===")
+
+    login = input("Логин: ")
+    password = input("Пароль: ")
+
+    if login in users and users[login] == password:
+        print("Добро пожаловать,", login)
+        return login
+
+    print("Неверный логин или пароль!")
+
+    return None
 
 def load_data():
     try:
